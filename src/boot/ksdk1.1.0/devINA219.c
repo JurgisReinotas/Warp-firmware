@@ -54,7 +54,7 @@ regReadINA219(uint16_t registerToRead, int numberOfBytes)
 }
 
 static int
-regWriteINA219(uint16_t regAddress, uint16_t valueToWrite, int numberOfBytes)
+regWriteINA219(uint16_t regAddress, uint16_t* &valueToWrite, int numberOfBytes)
 {
 	i2c_status_t	status;
   
@@ -102,6 +102,7 @@ devINA219init(void)
 	SEGGER_RTT_WriteString(0, "\r\n\tRead current register on INA219\n");
 	
 	regReadINA219(0x04, 2);
+	warpPrint((uint16_t*)0x04);
 	
 	SEGGER_RTT_WriteString(0, "\r\n\tDone reading the current register on INA219\n");
   	
