@@ -19,7 +19,7 @@
 #include "warp.h"
 
 static int
-regReadINA219(uint8_t registerToRead, int numberOfBytes)
+regReadINA219(uint16_t registerToRead, int numberOfBytes)
 {
 	i2c_status_t	status;
   
@@ -54,7 +54,7 @@ regReadINA219(uint8_t registerToRead, int numberOfBytes)
 }
 
 static int
-regWriteINA219(uint8_t valueToWrite, int numberOfBytes)
+regWriteINA219(uint16_t regAddress, uint16_t valueToWrite, int numberOfBytes)
 {
 	i2c_status_t	status;
   
@@ -67,15 +67,15 @@ regWriteINA219(uint8_t valueToWrite, int numberOfBytes)
 	status = I2C_DRV_MasterSendDataBlocking(
 		0 /* I2C peripheral instance */,
 		&slave,
-		NULL,
-		0,
+		regAddress,
+		2,
 		&valueToWrite,
 		numberOfBytes,
 		gWarpI2cTimeoutMilliseconds);
   
   /*!
-    NULL for a command
-    0 for zero bytes
+    regAddress for a register address on the INA219
+    2 for two bytes
     &valueToWrite - pointer to the register of the value to write
     numberOfBytes - number of bytes of data
   */
@@ -92,8 +92,18 @@ regWriteINA219(uint8_t valueToWrite, int numberOfBytes)
 int
 devINA219init()
 {
-  warpEnableI2Cpins();
+  	warpEnableI2Cpins();
 
-  
-	return;
+	SEGGER_RTT_WriteString(0, "\r\n\tSet the calibration value on INA219\n");
+	
+	regWriteINA219(0x05, 4096, 2);
+	
+	SEGGER_RTT_WriteString(0, "\r\n\tDone setting the calibration value on INA219\n");
+	SEGGER_RTT_WriteString(0, "\r\n\tRead current register on INA219\n");
+	
+	regReadINA219(0x04, 2);
+	
+	SEGGER_RTT_WriteString(0, "\r\n\tDone reading the current register on INA219\n");
+  	
+	return 0;
 }
