@@ -90,7 +90,7 @@ regWriteINA219(uint16_t regAddress, uint16_t valueToWrite, int numberOfBytes)
 
 
 int
-devINA219init()
+devINA219init(void)
 {
   	warpEnableI2Cpins();
 
