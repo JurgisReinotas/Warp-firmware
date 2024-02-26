@@ -26,7 +26,7 @@ regReadINA219(uint16_t registerToRead, int numberOfBytes)
 	i2c_device_t slave =
 	{
 		.address = 0x40,
-		.baudRate_kbps = gWarpI2cBaudRateKbps
+		.baudRate_kbps = 300
 	};
 
 	status = I2C_DRV_MasterReceiveDataBlocking(
@@ -36,7 +36,7 @@ regReadINA219(uint16_t registerToRead, int numberOfBytes)
 		0,
 		registerToRead,
 		numberOfBytes,
-		gWarpI2cTimeoutMilliseconds);
+		5);
   
   /*!
     NULL for a command
@@ -61,7 +61,7 @@ regWriteINA219(uint16_t regAddress, uint16_t valueToWrite, int numberOfBytes)
 	i2c_device_t slave =
 	{
 		.address = 0x40,
-		.baudRate_kbps = gWarpI2cBaudRateKbps
+		.baudRate_kbps = 300
 	};
 
 	status = I2C_DRV_MasterSendDataBlocking(
@@ -71,7 +71,7 @@ regWriteINA219(uint16_t regAddress, uint16_t valueToWrite, int numberOfBytes)
 		2,
 		&valueToWrite,
 		numberOfBytes,
-		gWarpI2cTimeoutMilliseconds);
+		5);
   
   /*!
     regAddress for a register address on the INA219
