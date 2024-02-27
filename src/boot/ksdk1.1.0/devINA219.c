@@ -231,7 +231,7 @@ initINA219(const uint8_t i2cAddress, uint16_t operatingVoltageMillivolts)
 {
 	deviceINA219State.i2cAddress			= i2cAddress;
 	deviceINA219State.operatingVoltageMillivolts	= operatingVoltageMillivolts;
-	configureSensorINA219(14751, 4096);
+	writeSensorRegisterINA219(0x05, 0x1000);
 
 	return;
 }
