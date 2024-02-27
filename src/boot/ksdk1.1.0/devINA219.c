@@ -65,7 +65,7 @@ writeSensorRegisterINA219(uint8_t deviceRegister, uint16_t payload)
 
 	warpScaleSupplyVoltage(deviceINA219State.operatingVoltageMillivolts);
 	commandByte[0] = deviceRegister;
-	payloadByte[0] = payload;
+	payloadByte = payload;
 	warpEnableI2Cpins();
 
 	status = I2C_DRV_MasterSendDataBlocking(
