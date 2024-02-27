@@ -95,11 +95,15 @@ configureSensorINA219(uint16_t payloadF_SETUP, uint16_t payloadCALIB_REG)
 	i2cWriteStatus1 = writeSensorRegisterINA219(kWarpSensorConfigurationRegisterINA219F_SETUP /* configuration register address */,
 												  payloadF_SETUP /* payload: Disable FIFO */
 	);
-
+	
+	SEGGER_RTT_WriteString(0, "\r\n\tINA219 configuration loaded\n");
+	
 	i2cWriteStatus2 = writeSensorRegisterINA219(kWarpSensorConfigurationRegisterINA219CALIB_REG /* calibration register address */,
 												  payloadCALIB_REG /* payload */
 	);
-
+	
+	SEGGER_RTT_WriteString(0, "\r\n\tINA219 Calibration done\n");
+	
 	return (i2cWriteStatus1 | i2cWriteStatus2);
 }
 
