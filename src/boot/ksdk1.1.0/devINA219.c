@@ -38,7 +38,7 @@ WarpStatus
 writeSensorRegisterINA219(uint8_t deviceRegister, uint16_t payload)
 {
 	uint8_t		commandByte[1];
-	uint8_t		payloadByte[1];
+	uint8_t		payloadByte[2];
 	i2c_status_t	status;
 
 	switch (deviceRegister)
