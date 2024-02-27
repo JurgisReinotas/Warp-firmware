@@ -91,19 +91,19 @@ writeSensorRegisterINA219(uint8_t deviceRegister, uint8_t payload)
 }
 
 WarpStatus
-configureSensorINA219(uint8_t payloadF_SETUP, uint8_t payloadCTRL_REG1)
+configureSensorINA219(uint8_t payloadF_SETUP, uint8_t payloadCALIB_REG)
 {
 	WarpStatus	i2cWriteStatus1, i2cWriteStatus2;
 
 
 	warpScaleSupplyVoltage(deviceINA219State.operatingVoltageMillivolts);
 
-	i2cWriteStatus1 = writeSensorRegisterINA219(kWarpSensorConfigurationRegisterINA219F_SETUP /* register address F_SETUP */,
+	i2cWriteStatus1 = writeSensorRegisterINA219(kWarpSensorConfigurationRegisterINA219F_SETUP /* configuration register address */,
 												  payloadF_SETUP /* payload: Disable FIFO */
 	);
 
-	i2cWriteStatus2 = writeSensorRegisterINA219(kWarpSensorConfigurationRegisterINA219CTRL_REG1 /* register address CTRL_REG1 */,
-												  payloadCTRL_REG1 /* payload */
+	i2cWriteStatus2 = writeSensorRegisterINA219(kWarpSensorConfigurationRegisterINA219CALIB_REG /* calibration register address */,
+												  payloadCALIB_REG /* payload */
 	);
 
 	return (i2cWriteStatus1 | i2cWriteStatus2);
