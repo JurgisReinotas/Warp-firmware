@@ -37,9 +37,10 @@ initINA219(const uint8_t i2cAddress, uint16_t operatingVoltageMillivolts)
 }
 
 WarpStatus
-writeSensorRegisterINA219(uint8_t deviceRegister, uint8_t payload)
+writeSensorRegisterINA219(uint_t deviceRegister, uint16_t payload)
 {
-	uint8_t		payloadByte[1], commandByte[1];
+	uint8_t		commandByte[1];
+	uint16_t	payloadByte[1];
 	i2c_status_t	status;
 
 	switch (deviceRegister)
@@ -73,7 +74,7 @@ writeSensorRegisterINA219(uint8_t deviceRegister, uint8_t payload)
 		commandByte,
 		1,
 		payloadByte,
-		1,
+		2,
 		gWarpI2cTimeoutMilliseconds);
 	if (status != kStatus_I2C_Success)
 	{
@@ -84,7 +85,7 @@ writeSensorRegisterINA219(uint8_t deviceRegister, uint8_t payload)
 }
 
 WarpStatus
-configureSensorINA219(uint8_t payloadF_SETUP, uint8_t payloadCALIB_REG)
+configureSensorINA219(uint16_t payloadF_SETUP, uint16_t payloadCALIB_REG)
 {
 	WarpStatus	i2cWriteStatus1, i2cWriteStatus2;
 
