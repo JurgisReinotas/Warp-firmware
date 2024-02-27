@@ -2354,7 +2354,7 @@ main(void)
 						warpPrint("\r\tInvalid selection '%c' !\n", key);
 					}
 				}
-
+#endif
 				break;
 			}
 
