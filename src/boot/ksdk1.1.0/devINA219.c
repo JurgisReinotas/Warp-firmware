@@ -32,6 +32,7 @@ initINA219(const uint8_t i2cAddress, uint16_t operatingVoltageMillivolts)
 {
 	deviceINA219State.i2cAddress			= i2cAddress;
 	deviceINA219State.operatingVoltageMillivolts	= operatingVoltageMillivolts;
+	configureSensorINA219(0x399F, 0x1000);
 
 	return;
 }
@@ -66,7 +67,7 @@ writeSensorRegisterINA219(uint8_t deviceRegister, uint16_t payload)
 	warpScaleSupplyVoltage(deviceINA219State.operatingVoltageMillivolts);
 	commandByte[0] = deviceRegister;
 	payloadByte[0] = payload;
-	payloadByte[1] = (payload << 8);
+	payloadByte[1] = (payload >> 8);
 	warpEnableI2Cpins();
 
 	status = I2C_DRV_MasterSendDataBlocking(
