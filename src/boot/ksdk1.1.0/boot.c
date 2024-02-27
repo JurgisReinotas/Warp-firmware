@@ -3227,8 +3227,8 @@ writeAllSensorsToFlash(int menuDelayBetweenEachRun, int loopForever)
 
 #if (WARP_BUILD_ENABLE_DEVINA219)
 	numberOfConfigErrors += configureSensorINA219(
-		0x00, /* Payload: Disable FIFO */
-		0x01  /* Normal read 8bit, 800Hz, normal, active mode */
+		0x399F, /* Payload: Disable FIFO */
+		0x1000  /* Normal read 8bit, 800Hz, normal, active mode */
 	);
 	sensorBitField = sensorBitField | kWarpFlashINA219BitField;
 #endif
@@ -3492,8 +3492,8 @@ printAllSensors(bool printHeadersAndCalibration, bool hexModeFlag,
 
 #if (WARP_BUILD_ENABLE_DEVINA219)
 	numberOfConfigErrors += configureSensorINA219(
-		0x00, /* Payload: Disable FIFO */
-		0x01  /* Normal read 8bit, 800Hz, normal, active mode */
+		0x399F, /* Payload: Disable FIFO */
+		0x1000  /* Normal read 8bit, 800Hz, normal, active mode */
 	);
 #endif
 
