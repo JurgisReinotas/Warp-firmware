@@ -25,6 +25,14 @@ extern volatile uint32_t		gWarpI2cBaudRateKbps;
 extern volatile uint32_t		gWarpI2cTimeoutMilliseconds;
 extern volatile uint32_t		gWarpSupplySettlingDelayMilliseconds;
 
+void
+initINA219(const uint8_t i2cAddress, uint16_t operatingVoltageMillivolts)
+{
+	deviceINA219State.i2cAddress			= i2cAddress;
+	deviceINA219State.operatingVoltageMillivolts	= operatingVoltageMillivolts;
+
+	return;
+}
 
 WarpStatus
 writeSensorRegisterINA219(uint8_t deviceRegister, uint16_t payload)
@@ -224,14 +232,4 @@ appendSensorDataINA219(uint8_t* buf)
 		index += 1;
 	}
 	return index;
-}
-
-void
-initINA219(const uint8_t i2cAddress, uint16_t operatingVoltageMillivolts)
-{
-	deviceINA219State.i2cAddress			= i2cAddress;
-	deviceINA219State.operatingVoltageMillivolts	= operatingVoltageMillivolts;
-	writeSensorRegisterINA219(0x05, 0x1000);
-
-	return;
 }
