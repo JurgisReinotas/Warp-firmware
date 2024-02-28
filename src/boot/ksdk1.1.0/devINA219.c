@@ -175,7 +175,7 @@ printSensorDataINA219(bool hexModeFlag)
 	/*
  	 *	LSB = 10E-5, which is equivalent to 10uA per bit.
    	 */
-	readSensorRegisterValueCombined = readSensorRegisterValueCombined * (uint16_t)10;
+	/* readSensorRegisterValueCombined = readSensorRegisterValueCombined * 10;*/
 	/* readSensorRegisterValueMSB = ((readSensorRegisterValueCombined) >> 8); */
 	/* readSensorRegisterValueLSB = readSensorRegisterValueCombined; */
 
@@ -218,7 +218,7 @@ appendSensorDataINA219(uint8_t* buf)
 	/*
  	 *	LSB = 10E-5, which is equivalent to 10uA per bit.
    	 */
-	readSensorRegisterValueCombined = readSensorRegisterValueCombined * (uint16_t)10;
+	/* readSensorRegisterValueCombined = readSensorRegisterValueCombined * (uint16_t)10;*/
 	/* readSensorRegisterValueMSB = ((readSensorRegisterValueCombined) >> 8); */
 	/* readSensorRegisterValueLSB = readSensorRegisterValueCombined; */
 
