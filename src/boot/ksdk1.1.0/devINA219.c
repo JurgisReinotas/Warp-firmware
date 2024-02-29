@@ -158,7 +158,7 @@ printSensorDataINA219(bool hexModeFlag)
 {
 	uint8_t		readSensorRegisterValueLSB;
 	uint8_t		readSensorRegisterValueMSB;
-	int16_t		readSensorRegisterValueCombined;
+	int32_t		readSensorRegisterValueCombined;
 	WarpStatus	i2cReadStatus;
 
 
@@ -170,14 +170,14 @@ printSensorDataINA219(bool hexModeFlag)
 	i2cReadStatus = readSensorRegisterINA219(kWarpSensorOutputRegisterINA219_Current, 2 /* numberOfBytes */);
 	readSensorRegisterValueMSB = deviceINA219State.i2cBuffer[0];
 	readSensorRegisterValueLSB = deviceINA219State.i2cBuffer[1];
-	readSensorRegisterValueCombined = ((uint16_t)(readSensorRegisterValueMSB) << 8) | (readSensorRegisterValueLSB);
+	readSensorRegisterValueCombined = ((readSensorRegisterValueMSB) << 8) | (readSensorRegisterValueLSB);
 	
 	/*
  	 *	LSB = 10E-5, which is equivalent to 10uA per bit.
    	 */
-	/* readSensorRegisterValueCombined = readSensorRegisterValueCombined * 10;*/
-	/* readSensorRegisterValueMSB = ((readSensorRegisterValueCombined) >> 8); */
-	/* readSensorRegisterValueLSB = readSensorRegisterValueCombined; */
+	readSensorRegisterValueCombined = readSensorRegisterValueCombined * 10;
+	readSensorRegisterValueMSB = ((readSensorRegisterValueCombined) >> 8);
+	readSensorRegisterValueLSB = readSensorRegisterValueCombined;
 
 	if (i2cReadStatus != kWarpStatusOK)
 	{
@@ -202,7 +202,7 @@ appendSensorDataINA219(uint8_t* buf)
 	uint8_t index = 0;
 	uint8_t readSensorRegisterValueLSB;
 	uint8_t readSensorRegisterValueMSB;
-	int16_t readSensorRegisterValueCombined;
+	int32_t readSensorRegisterValueCombined;
 	WarpStatus i2cReadStatus;
 
 	warpScaleSupplyVoltage(deviceINA219State.operatingVoltageMillivolts);
@@ -213,14 +213,14 @@ appendSensorDataINA219(uint8_t* buf)
 	i2cReadStatus                   = readSensorRegisterINA219(kWarpSensorOutputRegisterINA219_Current, 2 /* numberOfBytes */);
 	readSensorRegisterValueMSB      = deviceINA219State.i2cBuffer[0];
 	readSensorRegisterValueLSB      = deviceINA219State.i2cBuffer[1];
-	readSensorRegisterValueCombined = ((uint16_t)(readSensorRegisterValueMSB) << 8) | (readSensorRegisterValueLSB);
+	readSensorRegisterValueCombined = ((readSensorRegisterValueMSB) << 8) | (readSensorRegisterValueLSB);
 	
 	/*
  	 *	LSB = 10E-5, which is equivalent to 10uA per bit.
    	 */
-	/* readSensorRegisterValueCombined = readSensorRegisterValueCombined * (uint16_t)10;*/
-	/* readSensorRegisterValueMSB = ((readSensorRegisterValueCombined) >> 8); */
-	/* readSensorRegisterValueLSB = readSensorRegisterValueCombined; */
+	readSensorRegisterValueCombined = readSensorRegisterValueCombined * 10;
+	readSensorRegisterValueMSB = ((readSensorRegisterValueCombined) >> 8);
+	readSensorRegisterValueLSB = readSensorRegisterValueCombined;
 
 	if (i2cReadStatus != kWarpStatusOK)
 	{
