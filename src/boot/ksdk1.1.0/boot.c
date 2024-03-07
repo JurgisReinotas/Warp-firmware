@@ -3687,7 +3687,7 @@ printAllSensors(bool printHeadersAndCalibration, bool hexModeFlag,
 		warpPrint(" %12d, %6d,", RTC->TSR, RTC->TPR);
 #endif
 		//warpPrint(" %u\n", numberOfConfigErrors);
-		warpPrint("\n\n");
+		warpPrint("\n");
 
 		if (menuDelayBetweenEachRun > 0)
 		{
