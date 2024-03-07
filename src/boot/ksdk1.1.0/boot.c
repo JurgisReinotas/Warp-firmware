@@ -3598,7 +3598,7 @@ printAllSensors(bool printHeadersAndCalibration, bool hexModeFlag,
 #endif
 
 #if (WARP_BUILD_ENABLE_DEVINA219)
-		//warpPrint(" INA219 current, INA219 bus voltage");
+		//warpPrint(" INA219 current, INA219 bus voltage,");
 #endif
 
 #if (WARP_BUILD_ENABLE_DEVMAG3110)
@@ -3654,7 +3654,7 @@ printAllSensors(bool printHeadersAndCalibration, bool hexModeFlag,
 #endif
 
 #if (WARP_BUILD_ENABLE_DEVINA219)
-		printSensorDataINA219(hexModeFlag);
+		//printSensorDataINA219(hexModeFlag);
 #endif
 
 #if (WARP_BUILD_ENABLE_DEVMAG3110)
