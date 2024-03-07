@@ -1684,7 +1684,7 @@ main(void)
 #endif
 
 #if (WARP_BUILD_ENABLE_DEVINA219)
-		initINA219(	0x40	/* i2cAddress */,	kWarpDefaultSupplyVoltageMillivoltsINA219	)
+		initINA219(	0x40	/* i2cAddress */,	kWarpDefaultSupplyVoltageMillivoltsINA219	);
 #endif
 
 devSSD1331init();
