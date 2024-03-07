@@ -3598,7 +3598,7 @@ printAllSensors(bool printHeadersAndCalibration, bool hexModeFlag,
 #endif
 
 #if (WARP_BUILD_ENABLE_DEVINA219)
-		warpPrint(" INA219 current, INA219 bus voltage");
+		//warpPrint(" INA219 current, INA219 bus voltage");
 #endif
 
 #if (WARP_BUILD_ENABLE_DEVMAG3110)
@@ -3630,7 +3630,7 @@ printAllSensors(bool printHeadersAndCalibration, bool hexModeFlag,
 #if (WARP_CSVSTREAM_FLASH_PRINT_METADATA)
 		warpPrint(" RTC->TSR, RTC->TPR,");
 #endif
-		warpPrint(" numberOfConfigErrors");
+		//warpPrint(" numberOfConfigErrors");
 		warpPrint("\n\n");
 	}
 
@@ -3686,7 +3686,7 @@ printAllSensors(bool printHeadersAndCalibration, bool hexModeFlag,
 #if (WARP_CSVSTREAM_FLASH_PRINT_METADATA)
 		warpPrint(" %12d, %6d,", RTC->TSR, RTC->TPR);
 #endif
-		warpPrint(" %u\n", numberOfConfigErrors);
+		//warpPrint(" %u\n", numberOfConfigErrors);
 
 		if (menuDelayBetweenEachRun > 0)
 		{
