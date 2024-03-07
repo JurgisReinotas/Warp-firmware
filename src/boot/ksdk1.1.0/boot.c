@@ -3596,7 +3596,7 @@ printAllSensors(bool printHeadersAndCalibration, bool hexModeFlag,
 #endif
 
 #if (WARP_BUILD_ENABLE_DEVINA219)
-		warpPrint(" INA219 current,");
+		warpPrint(" INA219 current, INA219 power");
 #endif
 
 #if (WARP_BUILD_ENABLE_DEVMAG3110)
