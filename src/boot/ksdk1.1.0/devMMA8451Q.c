@@ -251,7 +251,7 @@ returnSensorDataMMA8451Q()
 	readSensorRegisterValueCombined[0] = -4000;
 	readSensorRegisterValueCombined[1] = 3000;
 
-	return &readSensorRegisterValueCombined;
+	return readSensorRegisterValueCombined;
 }
 
 void
