@@ -205,14 +205,14 @@ readSensorRegisterMMA8451Q(uint8_t deviceRegister, int numberOfBytes)
 	return kWarpStatusOK;
 }
 
-int32_t
+uint32_t
 returnSensorDataMMA8451Q()
 {
 	/* Returns X and Y accelerometer data as a joint 32 bit value where 16 MSBs are X and 16 LSBs are Y register data */
 	uint16_t	readSensorRegisterValueLSB;
 	uint16_t	readSensorRegisterValueMSB;
-	int32_t		readSensorRegisterValueCombined1;
-	int32_t		readSensorRegisterValueCombined2;
+	uint32_t	readSensorRegisterValueCombined1;
+	uint32_t	readSensorRegisterValueCombined2;
 	WarpStatus	i2cReadStatus;
 
 
