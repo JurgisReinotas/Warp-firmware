@@ -205,6 +205,56 @@ readSensorRegisterMMA8451Q(uint8_t deviceRegister, int numberOfBytes)
 	return kWarpStatusOK;
 }
 
+int32_t
+returnSensorDataMMA8451Q()
+{
+	uint16_t	readSensorRegisterValueLSB;
+	uint16_t	readSensorRegisterValueMSB;
+	int32_t		readSensorRegisterValueCombined1;
+	int32_t		readSensorRegisterValueCombined2;
+	WarpStatus	i2cReadStatus;
+
+
+	warpScaleSupplyVoltage(deviceMMA8451QState.operatingVoltageMillivolts);
+
+	/*
+	 *	From the MMA8451Q datasheet:
+	 *
+	 *		"A random read access to the LSB registers is not possible.
+	 *		Reading the MSB register and then the LSB register in sequence
+	 *		ensures that both bytes (LSB and MSB) belong to the same data
+	 *		sample, even if a new data sample arrives between reading the
+	 *		MSB and the LSB byte."
+	 *
+	 *	We therefore do 2-byte read transactions, for each of the registers.
+	 *	We could also improve things by doing a 6-byte read transaction.
+	 */
+	i2cReadStatus = readSensorRegisterMMA8451Q(kWarpSensorOutputRegisterMMA8451QOUT_X_MSB, 2 /* numberOfBytes */);
+	readSensorRegisterValueMSB = deviceMMA8451QState.i2cBuffer[0];
+	readSensorRegisterValueLSB = deviceMMA8451QState.i2cBuffer[1];
+	readSensorRegisterValueCombined1 = ((readSensorRegisterValueMSB & 0xFF) << 6) | (readSensorRegisterValueLSB >> 2);
+
+	/*
+	 *	Sign extend the 14-bit value based on knowledge that upper 2 bit are 0:
+	 */
+	readSensorRegisterValueCombined1 = (readSensorRegisterValueCombined1 ^ (1 << 13)) - (1 << 13);
+	readSensorRegisterValueCombined1 = (readSensorRegisterValueCombined1 << 16);
+
+	i2cReadStatus = readSensorRegisterMMA8451Q(kWarpSensorOutputRegisterMMA8451QOUT_Y_MSB, 2 /* numberOfBytes */);
+	readSensorRegisterValueMSB = deviceMMA8451QState.i2cBuffer[0];
+	readSensorRegisterValueLSB = deviceMMA8451QState.i2cBuffer[1];
+	readSensorRegisterValueCombined2 = ((readSensorRegisterValueMSB & 0xFF) << 6) | (readSensorRegisterValueLSB >> 2);
+
+	/*
+	 *	Sign extend the 14-bit value based on knowledge that upper 2 bit are 0:
+	 */
+	readSensorRegisterValueCombined2 = (readSensorRegisterValueCombined2 ^ (1 << 13)) - (1 << 13);
+
+	readSensorRegisterValueCombined1 = (readSensorRegisterValueCombined1 || readSensorRegisterValueCombined2
+
+	return readSensorRegisterValueCombined1;
+}
+
 void
 printSensorDataMMA8451Q(bool hexModeFlag)
 {
