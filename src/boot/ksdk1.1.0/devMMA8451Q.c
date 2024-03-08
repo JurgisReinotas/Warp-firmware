@@ -205,14 +205,13 @@ readSensorRegisterMMA8451Q(uint8_t deviceRegister, int numberOfBytes)
 	return kWarpStatusOK;
 }
 
-uint32_t
+int16_t
 returnSensorDataMMA8451Q()
 {
 	/* Returns X and Y accelerometer data as a joint 32 bit value where 16 MSBs are X and 16 LSBs are Y register data */
 	uint16_t	readSensorRegisterValueLSB;
 	uint16_t	readSensorRegisterValueMSB;
-	int16_t 	readSensorRegisterValueCombined;
-	uint32_t	combinedResult;
+	int16_t 	readSensorRegisterValueCombined[2];
 	WarpStatus	i2cReadStatus;
 
 
@@ -233,28 +232,24 @@ returnSensorDataMMA8451Q()
 	i2cReadStatus = readSensorRegisterMMA8451Q(kWarpSensorOutputRegisterMMA8451QOUT_X_MSB, 2 /* numberOfBytes */);
 	readSensorRegisterValueMSB = deviceMMA8451QState.i2cBuffer[0];
 	readSensorRegisterValueLSB = deviceMMA8451QState.i2cBuffer[1];
-	readSensorRegisterValueCombined = ((readSensorRegisterValueMSB & 0xFF) << 6) | (readSensorRegisterValueLSB >> 2);
+	readSensorRegisterValueCombined[0] = ((readSensorRegisterValueMSB & 0xFF) << 6) | (readSensorRegisterValueLSB >> 2);
 
 	/*
 	 *	Sign extend the 14-bit value based on knowledge that upper 2 bit are 0:
 	 */
-	readSensorRegisterValueCombined = (readSensorRegisterValueCombined ^ (1 << 13)) - (1 << 13);
-
-	combinedResult = (readSensorRegisterValueCombined & 0x00FF) << 16;
+	readSensorRegisterValueCombined[0] = (readSensorRegisterValueCombined[0] ^ (1 << 13)) - (1 << 13);
 
 	i2cReadStatus = readSensorRegisterMMA8451Q(kWarpSensorOutputRegisterMMA8451QOUT_Y_MSB, 2 /* numberOfBytes */);
 	readSensorRegisterValueMSB = deviceMMA8451QState.i2cBuffer[0];
 	readSensorRegisterValueLSB = deviceMMA8451QState.i2cBuffer[1];
-	readSensorRegisterValueCombined = ((readSensorRegisterValueMSB & 0xFF) << 6) | (readSensorRegisterValueLSB >> 2);
+	readSensorRegisterValueCombined[1] = ((readSensorRegisterValueMSB & 0xFF) << 6) | (readSensorRegisterValueLSB >> 2);
 
 	/*
 	 *	Sign extend the 14-bit value based on knowledge that upper 2 bit are 0:
 	 */
-	readSensorRegisterValueCombined = (readSensorRegisterValueCombined ^ (1 << 13)) - (1 << 13);
-	
-	combinedResult = combinedResult | (readSensorRegisterValueCombined & 0x00FF);
+	readSensorRegisterValueCombined[1] = (readSensorRegisterValueCombined[1] ^ (1 << 13)) - (1 << 13);
 
-	return combinedResult;
+	return readSensorRegisterValueCombined;
 }
 
 void
