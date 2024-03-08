@@ -251,7 +251,7 @@ returnSensorDataMMA8451Q()
 	 *	Sign extend the 14-bit value based on knowledge that upper 2 bit are 0:
 	 */
 	readSensorRegisterValueCombined[1] = (readSensorRegisterValueCombined[1] ^ (1 << 13)) - (1 << 13);
-	warpPrint(" %d,", readSensorRegisterValueCombined[1]);
+	warpPrint(" %d,", -4000);
 	readSensorRegisterValueCombined[0] = -4000;
 	readSensorRegisterValueCombined[1] = 3000;
 
