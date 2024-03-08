@@ -251,7 +251,7 @@ returnSensorDataMMA8451Q()
 	 */
 	readSensorRegisterValueCombined2 = (readSensorRegisterValueCombined2 ^ (1 << 13)) - (1 << 13);
 
-	readSensorRegisterValueCombined1 = (readSensorRegisterValueCombined1 || readSensorRegisterValueCombined2
+	readSensorRegisterValueCombined1 = (readSensorRegisterValueCombined1 || readSensorRegisterValueCombined2);
 
 	return readSensorRegisterValueCombined1;
 }
