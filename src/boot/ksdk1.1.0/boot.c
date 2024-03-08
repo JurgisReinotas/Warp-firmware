@@ -3654,8 +3654,8 @@ printAllSensors(bool printHeadersAndCalibration, bool hexModeFlag,
 
 #if (WARP_BUILD_ENABLE_DEVMMA8451Q)
 		jointXYSensorData = returnSensorDataMMA8451Q();
-		YSensorData = (jointXYSensorData);
-		XSensorData = (jointXYSensorData >> 16);
+		YSensorData = (jointXYSensorData & 0x00FF);
+		XSensorData = (jointXYSensorData >> 16) & 0x00FF;
 		warpPrint(" %d,", XSensorData);
 		warpPrint(" %d,", YSensorData);
 #endif
