@@ -3468,7 +3468,7 @@ printAllSensors(bool printHeadersAndCalibration, bool hexModeFlag,
 {
 	WarpStatus status;
 	uint32_t timeAtStart = OSA_TimeGetMsec();
-	int32_t jointXYSensorData;
+	uint32_t jointXYSensorData;
 	int16_t XSensorData;
 	int16_t YSensorData;
 
