@@ -3468,7 +3468,7 @@ printAllSensors(bool printHeadersAndCalibration, bool hexModeFlag,
 {
 	WarpStatus status;
 	uint32_t timeAtStart = OSA_TimeGetMsec();
-	uint8_t ptrToSensorData;
+	int16_t ptrToSensorData;
 
 	/*
 	 *	A 32-bit counter gives us > 2 years of before it wraps, even if sampling
