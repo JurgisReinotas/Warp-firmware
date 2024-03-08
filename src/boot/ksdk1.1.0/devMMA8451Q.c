@@ -205,7 +205,7 @@ readSensorRegisterMMA8451Q(uint8_t deviceRegister, int numberOfBytes)
 	return kWarpStatusOK;
 }
 
-int16_t *
+uint8_t
 returnSensorDataMMA8451Q()
 {
 	/* Returns X and Y accelerometer data as a joint 32 bit value where 16 MSBs are X and 16 LSBs are Y register data */
@@ -251,7 +251,7 @@ returnSensorDataMMA8451Q()
 	readSensorRegisterValueCombined[0] = -4000;
 	readSensorRegisterValueCombined[1] = 3000;
 
-	return readSensorRegisterValueCombined;
+	return &readSensorRegisterValueCombined;
 }
 
 void
