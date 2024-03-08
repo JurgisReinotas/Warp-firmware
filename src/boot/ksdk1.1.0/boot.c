@@ -3468,7 +3468,7 @@ printAllSensors(bool printHeadersAndCalibration, bool hexModeFlag,
 {
 	WarpStatus status;
 	uint32_t timeAtStart = OSA_TimeGetMsec();
-	int16_t* ptr;
+	int16_t data;
 
 	/*
 	 *	A 32-bit counter gives us > 2 years of before it wraps, even if sampling
@@ -3651,9 +3651,9 @@ printAllSensors(bool printHeadersAndCalibration, bool hexModeFlag,
 #endif
 
 #if (WARP_BUILD_ENABLE_DEVMMA8451Q)
-		ptr = returnSensorDataMMA8451Q();
-		warpPrint(" %d,", *ptr);
-		warpPrint(" %d,", *(ptr + 1));
+		data = returnSensorDataMMA8451Q();
+		warpPrint(" %d,", data);
+		//warpPrint(" %d,", *(ptr + 1));
 #endif
 
 #if (WARP_BUILD_ENABLE_DEVINA219)
