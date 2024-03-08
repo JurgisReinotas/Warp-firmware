@@ -3651,9 +3651,13 @@ printAllSensors(bool printHeadersAndCalibration, bool hexModeFlag,
 #endif
 
 #if (WARP_BUILD_ENABLE_DEVMMA8451Q)
-		data = returnSensorDataMMA8451Q();
+		// Get x data - flag = false
+		data = returnSensorDataMMA8451Q(false);
 		warpPrint(" %d,", data);
-		//warpPrint(" %d,", *(ptr + 1));
+
+		// Get y data - flag = true
+		data = returnSensorDataMMA8451Q(true);
+		warpPrint(" %d,", data);
 #endif
 
 #if (WARP_BUILD_ENABLE_DEVINA219)
