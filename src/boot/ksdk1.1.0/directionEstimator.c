@@ -2,6 +2,8 @@
 #include <stdlib.h>
 #include <string.h>
 #include <stdarg.h>
+#include "SEGGER_RTT.h"
+#include "warp.h"
 #include "devMMA8451Q.h"
 
 uint8_t* numberOfInstancesCalculator(uint8_t quarter, int16_t* x_ptr);
