@@ -89,6 +89,8 @@
 #include "devRV8803C7.h"
 #include "devSSD1331.h"
 
+#include "directionEstimator.h"
+
 
 #if (WARP_BUILD_ENABLE_DEVADXL362)
 	volatile WarpSPIDeviceState			deviceADXL362State;
@@ -3652,12 +3654,13 @@ printAllSensors(bool printHeadersAndCalibration, bool hexModeFlag,
 
 #if (WARP_BUILD_ENABLE_DEVMMA8451Q)
 		// Get x data - flag = false
-		data = returnSensorDataMMA8451Q(false);
-		warpPrint(" %d,", data);
+		//data = returnSensorDataMMA8451Q(false);
+		//warpPrint(" %d,", data);
+		directionEstimator();
 
 		// Get y data - flag = true
-		data = returnSensorDataMMA8451Q(true);
-		warpPrint(" %d,", data);
+		//data = returnSensorDataMMA8451Q(true);
+		//warpPrint(" %d,", data);
 #endif
 
 #if (WARP_BUILD_ENABLE_DEVINA219)
