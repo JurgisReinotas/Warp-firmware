@@ -11,7 +11,7 @@
 
 #include "devMMA8451Q.h"
 
-uint8_t* numberOfInstancesCalculator(uint8_t quarter, int16_t* x_ptr);
+//uint8_t* numberOfInstancesCalculator(uint8_t quarter, int16_t* x_ptr);
 
 void directionEstimator()
 {
