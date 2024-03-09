@@ -11,7 +11,7 @@
 
 #include "devMMA8451Q.h"
 
-uint8_t nr[2];
+uint8_t nr;
 
 void numberOfInstancesCalculator(uint8_t quarter, int16_t* x_ptr);
 
@@ -21,9 +21,8 @@ void directionEstimator()
     int16_t x_mean = 0;
     int16_t y_mean = 0;
     uint8_t quarter;
-    uint8_t* nr_ptr;
-    uint8_t nr_likely;
-    uint8_t nr_unlikely;
+    uint8_t quart_half;
+    uint8_t percentage;
     for(int i = 0; i < 50; i++)
     {
         x_value[i] = returnSensorDataMMA8451Q(false);
@@ -36,29 +35,48 @@ void directionEstimator()
     if (x_mean >= 0 && y_mean >= 0)
     {
         quarter = 1;
+        if(x_mean >= 3052) quart_half = 1;
+        else quart_half = 0;
     }
     else if (x_mean >= 0 && y_mean < 0)
     {
         quarter = 2;
+        if(x_mean >= 2952) quart_half = 0;
+        else quart_half = 1;
     }
     else if (x_mean < 0 && y_mean < 0)
     {
         quarter = 3;
+        if(x_mean >= -2834) quart_half = 0;
+        else quart_half = 1;
     }
     else
     {
         quarter = 4;
+        if(x_mean >= -3052) quart_half = 1;
+        else quart_half = 0;
     }
 
-    numberOfInstancesCalculator(quarter, &x_value);
-    warpPrint(" %d,", nr[0]);
-    warpPrint(" %d,", nr[1]);
+    numberOfInstancesCalculator(quarter, quart_half, &x_value);
+    switch(quarter)
+    {
+        case 1:
+
+            break;
+        case 2:
+
+            break;
+        case 3:
+
+            break;
+        default:
+            
+    }
 }
 
-void numberOfInstancesCalculator(uint8_t quarter, int16_t* x_ptr)
+void numberOfInstancesCalculator(uint8_t quarter, uint8_t quart_half, int16_t* x_ptr)
 {
-    nr[0] = 0;
-    nr[1] = 0;
+    nr = 0;
     for (int i = 0; i < 50; i++)
     {
         switch(quarter)
@@ -66,41 +84,41 @@ void numberOfInstancesCalculator(uint8_t quarter, int16_t* x_ptr)
             case 1:
                 if(*(x_ptr + i) >= 3052)
                 {
-                    nr[0] = nr[0] + 1;
+                    if(quart_half) nr = nr + 1;
                 }
                 else
                 {
-                    nr[1] = nr[1] + 1;
+                    if(!quart_half) nr = nr + 1;
                 }
                 break;
             case 2:
                 if(*(x_ptr + i) >= 2952)
                 {
-                    nr[0] = nr[0] + 1;
+                    if(!quart_half) nr = nr + 1;
                 }
                 else
                 {
-                    nr[1] = nr[1] + 1;
+                    if(quart_half) nr = nr + 1;
                 }
                 break;
             case 3:
-                if(*(x_ptr + i) <= -2834)
+                if(*(x_ptr + i) >= -2834)
                 {
-                    nr[0] = nr[0] + 1;
+                    if(!quart_half) nr = nr + 1;
                 }
                 else
                 {
-                    nr[1] = nr[1] + 1;
+                    if(quart_half) nr = nr + 1;
                 }
                 break;
             default:
-              if(*(x_ptr + i) <= -3052)
+              if(*(x_ptr + i) >= -3052)
                 {
-                    nr[0] = nr[0] + 1;
+                    if(quart_half) nr = nr + 1;
                 }
                 else
                 {
-                    nr[1] = nr[1] + 1;
+                    if(!quart_half) nr = nr + 1;
                 }
         }
         
