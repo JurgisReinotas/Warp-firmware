@@ -3656,9 +3656,8 @@ printAllSensors(bool printHeadersAndCalibration, bool hexModeFlag,
 		// Get x data - flag = false
 		//data = returnSensorDataMMA8451Q(false);
 		//warpPrint(" %d,", data);
-		warpPrint(" %d,", 0);
 		directionEstimator();
-		warpPrint(" %d,", 0);
+		warpPrint(" %d,", 1);
 
 		// Get y data - flag = true
 		//data = returnSensorDataMMA8451Q(true);
