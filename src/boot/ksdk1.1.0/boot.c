@@ -3656,7 +3656,9 @@ printAllSensors(bool printHeadersAndCalibration, bool hexModeFlag,
 		// Get x data - flag = false
 		//data = returnSensorDataMMA8451Q(false);
 		//warpPrint(" %d,", data);
+		warpPrint(" %d,", 0);
 		directionEstimator();
+		warpPrint(" %d,", 0);
 
 		// Get y data - flag = true
 		//data = returnSensorDataMMA8451Q(true);
@@ -3717,7 +3719,7 @@ printAllSensors(bool printHeadersAndCalibration, bool hexModeFlag,
 
 		rttKey = SEGGER_RTT_GetKey();
 
-		if ((rttKey == 'q') || (readingCount >= 400))
+		if ((rttKey == 'q') || (readingCount >= 10))
 		{
 			break;
 		}
