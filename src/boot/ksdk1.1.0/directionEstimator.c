@@ -45,7 +45,7 @@ void directionEstimator()
     warpPrint(" %d,", nr_unlikely);
 }
 
-uint_t8* numberOfInstancesCalculator(uint8_t quarter, int16_t* x_ptr)
+uint8_t* numberOfInstancesCalculator(uint8_t quarter, int16_t* x_ptr)
 {
     uint8_t nr[2];
     nr[0] = 0;
