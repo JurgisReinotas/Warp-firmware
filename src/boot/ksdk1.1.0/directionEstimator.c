@@ -11,6 +11,8 @@
 
 #include "devMMA8451Q.h"
 
+uint8_t nr[2];
+
 uint8_t* numberOfInstancesCalculator(uint8_t quarter, int16_t* x_ptr);
 
 void directionEstimator()
@@ -48,19 +50,13 @@ void directionEstimator()
         quarter = 4;
     }
 
-    warpPrint(" %d,", 0);
-    nr_ptr = numberOfInstancesCalculator(quarter, &x_value);
-    nr_likely = *nr_ptr;
-    nr_unlikely = *(nr_ptr + 1);
-    warpPrint(" %d,", 2);
-    warpPrint(" %d,", nr_likely);
-    warpPrint(" %d,", nr_unlikely);
-    warpPrint(" %d,", 3);
+    numberOfInstancesCalculator(quarter, &x_value);
+    warpPrint(" %d,", nr[0]);
+    warpPrint(" %d,", nr[1]);
 }
 
-uint8_t* numberOfInstancesCalculator(uint8_t quarter, int16_t* x_ptr)
+void numberOfInstancesCalculator(uint8_t quarter, int16_t* x_ptr)
 {
-    uint8_t nr[2];
     nr[0] = 0;
     nr[1] = 0;
     for (int i = 0; i < 50; i++)
@@ -109,6 +105,4 @@ uint8_t* numberOfInstancesCalculator(uint8_t quarter, int16_t* x_ptr)
         }
         
     }
-    warpPrint(" %d,", 1);
-    return &nr;
 }
