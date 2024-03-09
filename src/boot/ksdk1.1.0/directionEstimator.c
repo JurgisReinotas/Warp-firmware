@@ -48,6 +48,7 @@ void directionEstimator()
         quarter = 4;
     }
 
+    warpPrint(" %d,", 0);
     nr_ptr = numberOfInstancesCalculator(quarter, &x_value);
     nr_likely = *nr_ptr;
     nr_unlikely = *(nr_ptr + 1);
