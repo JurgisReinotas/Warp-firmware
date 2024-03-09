@@ -3714,7 +3714,7 @@ printAllSensors(bool printHeadersAndCalibration, bool hexModeFlag,
 
 		rttKey = SEGGER_RTT_GetKey();
 
-		if ((rttKey == 'q') || (readingCount >= 1000))
+		if ((rttKey == 'q') || (readingCount >= 400))
 		{
 			break;
 		}
