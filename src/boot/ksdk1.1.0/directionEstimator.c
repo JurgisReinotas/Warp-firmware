@@ -13,7 +13,7 @@
 
 uint8_t nr[2];
 
-uint8_t* numberOfInstancesCalculator(uint8_t quarter, int16_t* x_ptr);
+void numberOfInstancesCalculator(uint8_t quarter, int16_t* x_ptr);
 
 void directionEstimator()
 {
