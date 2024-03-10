@@ -69,19 +69,19 @@ void directionEstimator()
             {
                 warpPrint("North");
                 warpPrint(" %d", perc_likely);
-                warpPrint("\%, ");
+                warpPrint("%%, ");
                 warpPrint("West");
                 warpPrint(" %d", perc_unlikely);
-                warpPrint("\%, ");
+                warpPrint("%%, ");
             }
             else
             {
                 warpPrint("West");
                 warpPrint(" %d", perc_likely);
-                warpPrint("\%, ");
+                warpPrint("%%, ");
                 warpPrint("North");
                 warpPrint(" %d", perc_unlikely);
-                warpPrint("\%, ");
+                warpPrint("%%, ");
             }
             break;
         case 2:
@@ -89,19 +89,19 @@ void directionEstimator()
             {
                 warpPrint("West");
                 warpPrint(" %d", perc_likely);
-                warpPrint("\%, ");
+                warpPrint("%%, ");
                 warpPrint("South");
                 warpPrint(" %d", perc_unlikely);
-                warpPrint("\%, ");
+                warpPrint("%%, ");
             }
             else
             {
                 warpPrint("South");
                 warpPrint(" %d", perc_likely);
-                warpPrint("\%, ");
+                warpPrint("%%, ");
                 warpPrint("West");
                 warpPrint(" %d", perc_unlikely);
-                warpPrint("\%, ");
+                warpPrint("%%, ");
             }
             break;
         case 3:
@@ -109,19 +109,19 @@ void directionEstimator()
             {
                 warpPrint("South");
                 warpPrint(" %d", perc_likely);
-                warpPrint("\%, ");
+                warpPrint("%%, ");
                 warpPrint("East");
                 warpPrint(" %d", perc_unlikely);
-                warpPrint("\%, ");
+                warpPrint("%%, ");
             }
             else
             {
                 warpPrint("East");
                 warpPrint(" %d", perc_likely);
-                warpPrint("\%, ");
+                warpPrint("%%, ");
                 warpPrint("South");
                 warpPrint(" %d", perc_unlikely);
-                warpPrint("\%, ");
+                warpPrint("%%, ");
             }
             break;
         default:
@@ -129,19 +129,19 @@ void directionEstimator()
             {
                 warpPrint("East");
                 warpPrint(" %d", perc_likely);
-                warpPrint("\%, ");
+                warpPrint("%%, ");
                 warpPrint("North");
                 warpPrint(" %d", perc_unlikely);
-                warpPrint("\%, ");
+                warpPrint("%%, ");
             }
             else
             {
                 warpPrint("North");
                 warpPrint(" %d", perc_likely);
-                warpPrint("\%, ");
+                warpPrint("%%, ");
                 warpPrint("East");
                 warpPrint(" %d", perc_unlikely);
-                warpPrint("\%, ");
+                warpPrint("%%, ");
             }
     }
 }
