@@ -3597,7 +3597,7 @@ printAllSensors(bool printHeadersAndCalibration, bool hexModeFlag,
 #endif
 
 #if (WARP_BUILD_ENABLE_DEVMMA8451Q)
-		warpPrint(" Most likely direction with certainty in %, Closest possible direction with certainty in %");
+		warpPrint(" Most likely direction with certainty in %%, Closest possible direction with certainty in %%");
 #endif
 
 #if (WARP_BUILD_ENABLE_DEVINA219)
