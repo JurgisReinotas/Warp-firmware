@@ -153,7 +153,7 @@ void numberOfInstancesCalculator(uint8_t quarter, uint8_t quart_half, uint8_t n,
     nr = 0;
     for (int i = 0; i < n; i++)
     {
-        warpPrint(" %d", *(x_ptr + i));
+        warpPrint(" %d\n", *(x_ptr + i));
         switch(quarter)
         {
             case 1:
