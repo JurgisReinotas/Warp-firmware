@@ -89,7 +89,7 @@ void directionEstimator()
                 warpPrint("West");
                 warpPrint(" %d", perc_likely);
                 warpPrint("%, ");
-                warpPrint("North");
+                warpPrint("South");
                 warpPrint(" %d", perc_unlikely);
                 warpPrint("%, ");
             }
