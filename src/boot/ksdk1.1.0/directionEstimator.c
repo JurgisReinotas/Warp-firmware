@@ -21,8 +21,8 @@ void directionEstimator()
 {
     uint8_t n = 100;
     int16_t x_value[n], y_value[n];
-    int16_t x_mean = 0;
-    int16_t y_mean = 0;
+    int32_t x_mean = 0;
+    int32_t y_mean = 0;
     uint8_t quarter;
     uint8_t quart_half;
     int32_t perc_likely;
@@ -31,9 +31,11 @@ void directionEstimator()
     {
         x_value[i] = returnSensorDataMMA8451Q(false);
         y_value[i] = returnSensorDataMMA8451Q(true);
-        x_mean  = x_mean + x_value[i]/n;
-        y_mean  = y_mean + y_value[i]/n;
+        x_mean  = x_mean + x_value[i];
+        y_mean  = y_mean + y_value[i];
     }
+    x_mean = x_mean / n;
+    y_mean = y_mean / n;
 
     // Check which quarter the board is pointing at
     if (x_mean >= 0 && y_mean >= 0)
