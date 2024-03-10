@@ -19,7 +19,7 @@ void numberOfInstancesCalculator(uint8_t quarter, uint8_t quart_half, uint8_t n,
 
 void directionEstimator()
 {
-    uint8_t n = 100;
+    uint8_t n = 200;
     int16_t x_value[n], y_value[n];
     int32_t x_mean = 0;
     int32_t y_mean = 0;
