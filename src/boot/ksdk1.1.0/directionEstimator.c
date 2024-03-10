@@ -239,9 +239,8 @@ void numberOfInstancesCalculator(uint8_t quarter, uint8_t quart_half, uint8_t n,
                     }
                     total_weight = total_weight - 3052 - *(x_ptr + i);
                 }
-            warpPrint(" %d\n", nr_weight);
-            warpPrint(" %d\n", total_weight);
         }
-        
+        warpPrint(" %d\n", nr_weight);
+        warpPrint(" %d\n", total_weight);
     }
 }
