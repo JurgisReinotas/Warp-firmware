@@ -1689,7 +1689,7 @@ main(void)
 		initINA219(	0x40	/* i2cAddress */,	kWarpDefaultSupplyVoltageMillivoltsINA219	);
 #endif
 
-devSSD1331init();
+//devSSD1331init();
 	
 #if (WARP_BUILD_ENABLE_DEVLPS25H)
 		initLPS25H(	0x5C	/* i2cAddress */,	kWarpDefaultSupplyVoltageMillivoltsLPS25H	);
@@ -3232,8 +3232,8 @@ writeAllSensorsToFlash(int menuDelayBetweenEachRun, int loopForever)
 
 #if (WARP_BUILD_ENABLE_DEVINA219)
 	numberOfConfigErrors += configureSensorINA219(
-		0x099F, /* Payload: Disable FIFO */
-		0xA000  /* Normal read 8bit, 800Hz, normal, active mode */
+		0x099F, /* Configuration register value */
+		0xA000  /* Calibration register value */
 	);
 	sensorBitField = sensorBitField | kWarpFlashINA219BitField;
 #endif
@@ -3498,8 +3498,8 @@ printAllSensors(bool printHeadersAndCalibration, bool hexModeFlag,
 
 #if (WARP_BUILD_ENABLE_DEVINA219)
 	numberOfConfigErrors += configureSensorINA219(
-		0x099F, /* Payload: Disable FIFO */
-		0xA000  /* Normal read 8bit, 800Hz, normal, active mode */
+		0x099F, /* Configuration register value */
+		0xA000  /* Calibration register value */
 	);
 #endif
 
@@ -3597,7 +3597,7 @@ printAllSensors(bool printHeadersAndCalibration, bool hexModeFlag,
 #endif
 
 #if (WARP_BUILD_ENABLE_DEVMMA8451Q)
-		warpPrint(" MMA8451 x, MMA8451 y, MMA8451 z,");
+		warpPrint(" Most likely direction with certainty in %, Closest possible direction with certainty in %");
 #endif
 
 #if (WARP_BUILD_ENABLE_DEVINA219)
