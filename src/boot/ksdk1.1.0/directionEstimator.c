@@ -12,8 +12,8 @@
 #include "devMMA8451Q.h"
 
 uint8_t nr;
-int16_t nr_weight;
-int16_t total_weight;
+int32_t nr_weight;
+int32_t total_weight;
 
 void numberOfInstancesCalculator(uint8_t quarter, uint8_t quart_half, uint8_t n, int16_t* x_ptr);
 
@@ -25,8 +25,8 @@ void directionEstimator()
     int16_t y_mean = 0;
     uint8_t quarter;
     uint8_t quart_half;
-    int16_t perc_likely;
-    int16_t perc_unlikely;
+    int32_t perc_likely;
+    int32_t perc_unlikely;
     for(int i = 0; i < n; i++)
     {
         x_value[i] = returnSensorDataMMA8451Q(false);
@@ -157,7 +157,6 @@ void numberOfInstancesCalculator(uint8_t quarter, uint8_t quart_half, uint8_t n,
     total_weight = 0;
     for (int i = 0; i < n; i++)
     {
-        //warpPrint(" %d\n", *(x_ptr + i));
         switch(quarter)
         {
             case 1:
@@ -165,7 +164,6 @@ void numberOfInstancesCalculator(uint8_t quarter, uint8_t quart_half, uint8_t n,
                 {
                     if(quart_half)
                     {
-                        nr = nr + 1;
                         nr_weight = nr_weight + *(x_ptr + i) - 3052;
                     }
                     total_weight = total_weight + *(x_ptr + i) - 3052;
@@ -174,7 +172,6 @@ void numberOfInstancesCalculator(uint8_t quarter, uint8_t quart_half, uint8_t n,
                 {
                     if(!quart_half)
                     {
-                        nr = nr + 1;
                         nr_weight = nr_weight + 3052 - *(x_ptr + i);
                     }
                     total_weight = total_weight + 3052 - *(x_ptr + i);
@@ -185,7 +182,6 @@ void numberOfInstancesCalculator(uint8_t quarter, uint8_t quart_half, uint8_t n,
                 {
                     if(!quart_half)
                     {
-                        nr = nr + 1;
                         nr_weight = nr_weight + *(x_ptr + i) - 2952;
                     }
                     total_weight = total_weight + *(x_ptr + i) - 2952;
@@ -194,7 +190,6 @@ void numberOfInstancesCalculator(uint8_t quarter, uint8_t quart_half, uint8_t n,
                 {
                     if(quart_half)
                     {
-                        nr = nr + 1;
                         nr_weight = nr_weight + 2952 - *(x_ptr + i);
                     }
                     total_weight = total_weight + 2952 - *(x_ptr + i);
@@ -205,7 +200,6 @@ void numberOfInstancesCalculator(uint8_t quarter, uint8_t quart_half, uint8_t n,
                 {
                     if(!quart_half)
                     {
-                        nr = nr + 1;
                         nr_weight = nr_weight + *(x_ptr + i) + 2834;
                     }
                     total_weight = total_weight + *(x_ptr + i) + 2834;
@@ -214,7 +208,6 @@ void numberOfInstancesCalculator(uint8_t quarter, uint8_t quart_half, uint8_t n,
                 {
                     if(quart_half)
                     {
-                        nr = nr + 1;
                         nr_weight = nr_weight - 2834 - *(x_ptr + i);
                     }
                     total_weight = total_weight - 2834 - *(x_ptr + i);
@@ -225,7 +218,6 @@ void numberOfInstancesCalculator(uint8_t quarter, uint8_t quart_half, uint8_t n,
                 {
                     if(quart_half)
                     {
-                        nr = nr + 1;
                         nr_weight = nr_weight + *(x_ptr + i) + 3052;
                     }
                     total_weight = total_weight + *(x_ptr + i) + 3052;
@@ -234,13 +226,10 @@ void numberOfInstancesCalculator(uint8_t quarter, uint8_t quart_half, uint8_t n,
                 {
                     if(!quart_half)
                     {
-                        nr = nr + 1;
                         nr_weight = nr_weight - 3052 - *(x_ptr + i);
                     }
                     total_weight = total_weight - 3052 - *(x_ptr + i);
                 }
         }
-        warpPrint(" %d\n", nr_weight);
-        warpPrint(" %d\n", total_weight);
     }
 }
