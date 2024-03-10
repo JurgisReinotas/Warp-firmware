@@ -144,6 +144,8 @@ void directionEstimator()
                 warpPrint("%%, ");
             }
     }
+    warpPrint(" %d", (x_mean % 10000));
+    warpPrint(" %d", (y_mean % 10000));
 }
 
 void numberOfInstancesCalculator(uint8_t quarter, uint8_t quart_half, uint8_t n, int16_t* x_ptr)
