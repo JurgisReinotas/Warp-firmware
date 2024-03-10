@@ -62,7 +62,7 @@ void directionEstimator()
     numberOfInstancesCalculator(quarter, quart_half, n, &x_value);
     perc_likely = (nr * 100) / n;
     perc_unlikely = ((n - nr) * 100) / n;
-    switch(quarter)
+    /*switch(quarter)
     {
         case 1:
             if(!quart_half)
@@ -145,7 +145,7 @@ void directionEstimator()
             }
     }
     warpPrint(" %d", (x_mean % 10000));
-    warpPrint(" %d", (y_mean % 10000));
+    warpPrint(" %d", (y_mean % 10000));*/
 }
 
 void numberOfInstancesCalculator(uint8_t quarter, uint8_t quart_half, uint8_t n, int16_t* x_ptr)
@@ -153,6 +153,7 @@ void numberOfInstancesCalculator(uint8_t quarter, uint8_t quart_half, uint8_t n,
     nr = 0;
     for (int i = 0; i < n; i++)
     {
+        warpPrint(" %d", *(x_ptr + i));
         switch(quarter)
         {
             case 1:
