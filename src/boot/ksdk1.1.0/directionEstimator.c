@@ -22,7 +22,8 @@ void directionEstimator()
     int16_t y_mean = 0;
     uint8_t quarter;
     uint8_t quart_half;
-    uint8_t percentage;
+    uint8_t perc_likely;
+    uint8_t perc_unlikely;
     for(int i = 0; i < 50; i++)
     {
         x_value[i] = returnSensorDataMMA8451Q(false);
@@ -58,19 +59,89 @@ void directionEstimator()
     }
 
     numberOfInstancesCalculator(quarter, quart_half, &x_value);
+    perc_likely = (nr * 100) / 50;
+    perc_unlikely = ((50 - nr) * 100) / 50;
     switch(quarter)
     {
         case 1:
-
+            if(!quart_half)
+            {
+                warpPrint("North");
+                warpPrint(" %d", perc_likely);
+                warpPrint("%, ");
+                warpPrint("West");
+                warpPrint(" %d", perc_unlikely);
+                warpPrint("%, ");
+            }
+            else
+            {
+                warpPrint("West");
+                warpPrint(" %d", perc_likely);
+                warpPrint("%, ");
+                warpPrint("North");
+                warpPrint(" %d", perc_unlikely);
+                warpPrint("%, ");
+            }
             break;
         case 2:
-
+            if(!quart_half)
+            {
+                warpPrint("West");
+                warpPrint(" %d", perc_likely);
+                warpPrint("%, ");
+                warpPrint("North");
+                warpPrint(" %d", perc_unlikely);
+                warpPrint("%, ");
+            }
+            else
+            {
+                warpPrint("South");
+                warpPrint(" %d", perc_likely);
+                warpPrint("%, ");
+                warpPrint("West");
+                warpPrint(" %d", perc_unlikely);
+                warpPrint("%, ");
+            }
             break;
         case 3:
-
+            if(!quart_half)
+            {
+                warpPrint("South");
+                warpPrint(" %d", perc_likely);
+                warpPrint("%, ");
+                warpPrint("East");
+                warpPrint(" %d", perc_unlikely);
+                warpPrint("%, ");
+            }
+            else
+            {
+                warpPrint("East");
+                warpPrint(" %d", perc_likely);
+                warpPrint("%, ");
+                warpPrint("South");
+                warpPrint(" %d", perc_unlikely);
+                warpPrint("%, ");
+            }
             break;
         default:
-            
+            if(!quart_half)
+            {
+                warpPrint("East");
+                warpPrint(" %d", perc_likely);
+                warpPrint("%, ");
+                warpPrint("North");
+                warpPrint(" %d", perc_unlikely);
+                warpPrint("%, ");
+            }
+            else
+            {
+                warpPrint("North");
+                warpPrint(" %d", perc_likely);
+                warpPrint("%, ");
+                warpPrint("East");
+                warpPrint(" %d", perc_unlikely);
+                warpPrint("%, ");
+            }
     }
 }
 
