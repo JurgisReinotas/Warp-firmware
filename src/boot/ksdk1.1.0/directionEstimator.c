@@ -63,7 +63,7 @@ void directionEstimator()
 
     numberOfInstancesCalculator(quarter, quart_half, n, &x_value);
     perc_likely = (nr_weight * 100) / total_weight;
-    perc_unlikely = ((total_weight - nr_weight) * 100) / total_weight;
+    perc_unlikely = 100 - perc_likely;
     switch(quarter)
     {
         case 1:
