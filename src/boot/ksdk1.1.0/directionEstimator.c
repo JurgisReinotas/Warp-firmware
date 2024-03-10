@@ -1,6 +1,7 @@
 #include "config.h"
 
 #include <stdio.h>
+#include <cmath>
 #include <stdlib.h>
 #include <string.h>
 #include <stdarg.h>
@@ -12,6 +13,8 @@
 #include "devMMA8451Q.h"
 
 uint8_t nr;
+uint8_t nr_weight;
+uint8_t total_weight;
 
 void numberOfInstancesCalculator(uint8_t quarter, uint8_t quart_half, uint8_t n, int16_t* x_ptr);
 
@@ -60,8 +63,8 @@ void directionEstimator()
     }
 
     numberOfInstancesCalculator(quarter, quart_half, n, &x_value);
-    perc_likely = (nr * 100) / n;
-    perc_unlikely = ((n - nr) * 100) / n;
+    perc_likely = (nr_weight * 100) / total_weight;
+    perc_unlikely = ((total_weight - nr_weight) * 100) / total_weight;
     switch(quarter)
     {
         case 1:
@@ -151,6 +154,8 @@ void directionEstimator()
 void numberOfInstancesCalculator(uint8_t quarter, uint8_t quart_half, uint8_t n, int16_t* x_ptr)
 {
     nr = 0;
+    nr_weight = 0;
+    total_weight = 0;
     for (int i = 0; i < n; i++)
     {
         //warpPrint(" %d\n", *(x_ptr + i));
@@ -159,41 +164,81 @@ void numberOfInstancesCalculator(uint8_t quarter, uint8_t quart_half, uint8_t n,
             case 1:
                 if(*(x_ptr + i) >= 3052)
                 {
-                    if(quart_half) nr = nr + 1;
+                    if(quart_half)
+                    {
+                        nr = nr + 1;
+                        nr_weight = nr_weight + *(x_ptr + i) - 3052;
+                    }
+                    total_weight = total_weight + *(x_ptr + i) - 3052;
                 }
                 else
                 {
-                    if(!quart_half) nr = nr + 1;
+                    if(!quart_half)
+                    {
+                        nr = nr + 1;
+                        nr_weight = nr_weight + 3052 - *(x_ptr + i);
+                    }
+                    total_weight = total_weight + 3052 - *(x_ptr + i);
                 }
                 break;
             case 2:
                 if(*(x_ptr + i) >= 2952)
                 {
-                    if(!quart_half) nr = nr + 1;
+                    if(!quart_half)
+                    {
+                        nr = nr + 1;
+                        nr_weight = nr_weight + *(x_ptr + i) - 2952;
+                    }
+                    total_weight = total_weight + *(x_ptr + i) - 2952;
                 }
                 else
                 {
-                    if(quart_half) nr = nr + 1;
+                    if(quart_half)
+                    {
+                        nr = nr + 1;
+                        nr_weight = nr_weight + 2952 - *(x_ptr + i);
+                    }
+                    total_weight = total_weight + 2952 - *(x_ptr + i);
                 }
                 break;
             case 3:
                 if(*(x_ptr + i) >= -2834)
                 {
-                    if(!quart_half) nr = nr + 1;
+                    if(!quart_half)
+                    {
+                        nr = nr + 1;
+                        nr_weight = nr_weight + *(x_ptr + i) + 2834;
+                    }
+                    total_weight = total_weight + *(x_ptr + i) + 2834;
                 }
                 else
                 {
-                    if(quart_half) nr = nr + 1;
+                    if(quart_half)
+                    {
+                        nr = nr + 1;
+                        nr_weight = nr_weight - 2834 - *(x_ptr + i);
+                    }
+                    total_weight = total_weight - 2834 - *(x_ptr + i);
                 }
                 break;
             default:
               if(*(x_ptr + i) >= -3052)
                 {
-                    if(quart_half) nr = nr + 1;
+                    if(quart_half)
+                    {
+                        nr = nr + 1;
+                        nr_weight = nr_weight + *(x_ptr + i) + 3052;
+                    }
+                    total_weight = total_weight + *(x_ptr + i) + 3052;
                 }
                 else
                 {
-                    if(!quart_half) nr = nr + 1;
+                    if(!quart_half)
+                    {
+                        nr = nr + 1;
+                        nr_weight = nr_weight - 3052 - *(x_ptr + i);
+                    }
+                    total_weight = total_weight - 3052 - *(x_ptr + i);
                 }
         }
         
