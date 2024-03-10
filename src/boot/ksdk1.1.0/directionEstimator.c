@@ -13,23 +13,24 @@
 
 uint8_t nr;
 
-void numberOfInstancesCalculator(uint8_t quarter, uint8_t quart_half, int16_t* x_ptr);
+void numberOfInstancesCalculator(uint8_t quarter, uint8_t quart_half, uint8_t n, int16_t* x_ptr);
 
 void directionEstimator()
 {
-    int16_t x_value[50], y_value[50];
+    uint8_t n = 100;
+    int16_t x_value[n], y_value[n];
     int16_t x_mean = 0;
     int16_t y_mean = 0;
     uint8_t quarter;
     uint8_t quart_half;
     uint8_t perc_likely;
     uint8_t perc_unlikely;
-    for(int i = 0; i < 50; i++)
+    for(int i = 0; i < n; i++)
     {
         x_value[i] = returnSensorDataMMA8451Q(false);
         y_value[i] = returnSensorDataMMA8451Q(true);
-        x_mean  = x_mean + x_value[i]/50;
-        y_mean  = y_mean + y_value[i]/50;
+        x_mean  = x_mean + x_value[i]/n;
+        y_mean  = y_mean + y_value[i]/n;
     }
 
     // Check which quarter the board is pointing at
@@ -58,9 +59,9 @@ void directionEstimator()
         else quart_half = 0;
     }
 
-    numberOfInstancesCalculator(quarter, quart_half, &x_value);
-    perc_likely = (nr * 100) / 50;
-    perc_unlikely = ((50 - nr) * 100) / 50;
+    numberOfInstancesCalculator(quarter, quart_half, n, &x_value);
+    perc_likely = (nr * 100) / n;
+    perc_unlikely = ((n - nr) * 100) / n;
     switch(quarter)
     {
         case 1:
@@ -68,19 +69,19 @@ void directionEstimator()
             {
                 warpPrint("North");
                 warpPrint(" %d", perc_likely);
-                warpPrint("%, ");
+                warpPrint("\%, ");
                 warpPrint("West");
                 warpPrint(" %d", perc_unlikely);
-                warpPrint("%, ");
+                warpPrint("\%, ");
             }
             else
             {
                 warpPrint("West");
                 warpPrint(" %d", perc_likely);
-                warpPrint("%, ");
+                warpPrint("\%, ");
                 warpPrint("North");
                 warpPrint(" %d", perc_unlikely);
-                warpPrint("%, ");
+                warpPrint("\%, ");
             }
             break;
         case 2:
@@ -88,19 +89,19 @@ void directionEstimator()
             {
                 warpPrint("West");
                 warpPrint(" %d", perc_likely);
-                warpPrint("%, ");
+                warpPrint("\%, ");
                 warpPrint("South");
                 warpPrint(" %d", perc_unlikely);
-                warpPrint("%, ");
+                warpPrint("\%, ");
             }
             else
             {
                 warpPrint("South");
                 warpPrint(" %d", perc_likely);
-                warpPrint("%, ");
+                warpPrint("\%, ");
                 warpPrint("West");
                 warpPrint(" %d", perc_unlikely);
-                warpPrint("%, ");
+                warpPrint("\%, ");
             }
             break;
         case 3:
@@ -108,19 +109,19 @@ void directionEstimator()
             {
                 warpPrint("South");
                 warpPrint(" %d", perc_likely);
-                warpPrint("%, ");
+                warpPrint("\%, ");
                 warpPrint("East");
                 warpPrint(" %d", perc_unlikely);
-                warpPrint("%, ");
+                warpPrint("\%, ");
             }
             else
             {
                 warpPrint("East");
                 warpPrint(" %d", perc_likely);
-                warpPrint("%, ");
+                warpPrint("\%, ");
                 warpPrint("South");
                 warpPrint(" %d", perc_unlikely);
-                warpPrint("%, ");
+                warpPrint("\%, ");
             }
             break;
         default:
@@ -128,27 +129,27 @@ void directionEstimator()
             {
                 warpPrint("East");
                 warpPrint(" %d", perc_likely);
-                warpPrint("%, ");
+                warpPrint("\%, ");
                 warpPrint("North");
                 warpPrint(" %d", perc_unlikely);
-                warpPrint("%, ");
+                warpPrint("\%, ");
             }
             else
             {
                 warpPrint("North");
                 warpPrint(" %d", perc_likely);
-                warpPrint("%, ");
+                warpPrint("\%, ");
                 warpPrint("East");
                 warpPrint(" %d", perc_unlikely);
-                warpPrint("%, ");
+                warpPrint("\%, ");
             }
     }
 }
 
-void numberOfInstancesCalculator(uint8_t quarter, uint8_t quart_half, int16_t* x_ptr)
+void numberOfInstancesCalculator(uint8_t quarter, uint8_t quart_half, uint8_t n, int16_t* x_ptr)
 {
     nr = 0;
-    for (int i = 0; i < 50; i++)
+    for (int i = 0; i < n; i++)
     {
         switch(quarter)
         {
