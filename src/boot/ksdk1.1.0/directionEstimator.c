@@ -15,7 +15,7 @@ uint8_t nr;
 int32_t nr_weight;
 int32_t total_weight;
 
-void numberOfInstancesCalculator(uint8_t quarter, uint8_t quart_half, uint8_t n, int16_t* x_ptr);
+void numberOfInstancesCalculator(uint8_t quarter, uint8_t quart_half, uint8_t n, int16_t * x_ptr);
 
 void directionEstimator()
 {
@@ -152,7 +152,7 @@ void directionEstimator()
     warpPrint(" %d\n", (y_mean % 10000));
 }
 
-void numberOfInstancesCalculator(uint8_t quarter, uint8_t quart_half, uint8_t n, int16_t* x_ptr)
+void numberOfInstancesCalculator(uint8_t quarter, uint8_t quart_half, uint8_t n, int16_t * x_ptr)
 {
     nr = 0;
     nr_weight = 0;
