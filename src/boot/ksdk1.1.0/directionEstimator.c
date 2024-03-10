@@ -12,8 +12,8 @@
 #include "devMMA8451Q.h"
 
 uint8_t nr;
-int8_t nr_weight;
-int8_t total_weight;
+int16_t nr_weight;
+int16_t total_weight;
 
 void numberOfInstancesCalculator(uint8_t quarter, uint8_t quart_half, uint8_t n, int16_t* x_ptr);
 
@@ -25,8 +25,8 @@ void directionEstimator()
     int16_t y_mean = 0;
     uint8_t quarter;
     uint8_t quart_half;
-    int8_t perc_likely;
-    int8_t perc_unlikely;
+    int16_t perc_likely;
+    int16_t perc_unlikely;
     for(int i = 0; i < n; i++)
     {
         x_value[i] = returnSensorDataMMA8451Q(false);
